@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import type { ChangeEvent, InputHTMLAttributes, HTMLAttributes, ButtonHTMLAttributes } from 'react';
 import classnames from 'classnames';
 import type { BaseCheckboxProps } from './PropsType';
-import CheckboxGroup from './CheckboxGroup';
+import type CheckboxGroup from './CheckboxGroup';
 import Cell from '../cell';
 
 const getChecked = (props: CheckboxProps, defaultChecked: boolean) => {

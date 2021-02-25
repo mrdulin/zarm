@@ -5,6 +5,7 @@ import BScroll from 'better-scroll';
 import type { WheelItem, WheelValue } from './PropsType';
 // eslint-disable-next-line import/no-duplicates
 import type BaseWheelProps from './PropsType';
+
 import { isArray } from '../utils/validate';
 
 const getValue = (props, defaultValue?: any) => {

@@ -8,19 +8,11 @@
  * onClickLeft： 左边按钮点击事件
  * onClickRight： 右边按钮点击事件
  */
-import React, { CSSProperties, PureComponent } from 'react';
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Text,
-  StatusBar,
-  ViewStyle,
-  TextStyle,
-  Platform,
-} from 'react-native';
-
-import PropsType from './PropsType';
+import React, { PureComponent } from 'react';
+import type { CSSProperties } from 'react';
+import { StyleSheet, View, TouchableOpacity, Text, StatusBar, Platform } from 'react-native';
+import type { TextStyle, ViewStyle } from 'react-native';
+import type PropsType from './PropsType';
 import navBarStyle from './style/index.native';
 
 export interface NavBarProps extends PropsType {
@@ -63,21 +55,17 @@ export default class NavBar extends PureComponent<NavBarProps, any> {
 
     const leftBtn = (
       <TouchableOpacity>
-        <Text style={[styles!.btn]}>
-          {left}
-        </Text>
+        <Text style={[styles!.btn]}>{left}</Text>
       </TouchableOpacity>
     );
 
-    const rightBtn = right
-      ? (
-        <TouchableOpacity>
-          <Text style={[styles!.btn, styles!.rightBtn]}>
-            {right}
-          </Text>
-        </TouchableOpacity>
-      )
-      : <Text style={styles!.btn} />;
+    const rightBtn = right ? (
+      <TouchableOpacity>
+        <Text style={[styles!.btn, styles!.rightBtn]}>{right}</Text>
+      </TouchableOpacity>
+    ) : (
+      <Text style={styles!.btn} />
+    );
 
     return (
       <View>
@@ -88,9 +76,7 @@ export default class NavBar extends PureComponent<NavBarProps, any> {
             {leftBtn}
 
             <View style={styles!.titleWrapper}>
-              <Text style={styles!.titleText as TextStyle}>
-                Photos
-              </Text>
+              <Text style={styles!.titleText as TextStyle}>Photos</Text>
             </View>
 
             {rightBtn}

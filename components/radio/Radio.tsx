@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import type { ChangeEvent, InputHTMLAttributes, HTMLAttributes, ButtonHTMLAttributes } from 'react';
 import classnames from 'classnames';
 import type { BaseRadioProps } from './PropsType';
-import RadioGroup from './RadioGroup';
+import type RadioGroup from './RadioGroup';
 import Cell from '../cell';
 
 const getChecked = (props: RadioProps, defaultChecked: boolean) => {

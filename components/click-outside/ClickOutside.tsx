@@ -1,5 +1,5 @@
 import React from 'react';
-import ClickOutsideProps from './PropsType';
+import type ClickOutsideProps from './PropsType';
 import Events from '../utils/events';
 
 export default class ClickOutside extends React.Component<ClickOutsideProps> {
@@ -70,6 +70,10 @@ export default class ClickOutside extends React.Component<ClickOutsideProps> {
   render() {
     const { onClickOutside, disabled, children, ignoredNode, ...rest } = this.props;
 
-    return <div ref={this.mountContainer} {...rest}>{children}</div>;
+    return (
+      <div ref={this.mountContainer} {...rest}>
+        {children}
+      </div>
+    );
   }
 }

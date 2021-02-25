@@ -17,7 +17,8 @@
       "react-native",
       "node",
       "jest"
-    ]
+    ],
+    "importsNotUsedAsValues":"error"
   },
   "include": [
     "components/**/*"
@@ -27,5 +28,5 @@
     "lib",
     "es"
   ],
-  "compileOnSave": false
+  "compileOnSave": false,
 }

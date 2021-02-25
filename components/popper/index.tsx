@@ -8,9 +8,10 @@ import ClickOutside from '../click-outside';
 import { canUseDOM, getOuterSizes } from '../utils/dom';
 import { directionMap } from './PropsType';
 // eslint-disable-next-line import/no-duplicates
-import type BasePopperProps from './PropsType';
-// eslint-disable-next-line import/no-duplicates
 import type { PopperPlacement } from './PropsType';
+// eslint-disable-next-line import/no-duplicates
+import type BasePopperProps from './PropsType';
+
 import Events from '../utils/events';
 
 export interface PopperProps extends BasePopperProps, HTMLAttributes<HTMLDivElement> {

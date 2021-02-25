@@ -1,4 +1,7 @@
-import BaseDatePickerViewProps, { DateValue } from '../PropsType';
+// eslint-disable-next-line import/no-duplicates
+import type { DateValue } from '../PropsType';
+// eslint-disable-next-line import/no-duplicates
+import type BaseDatePickerViewProps from '../PropsType';
 
 const isExtendDate = (date?: DateValue): Date | '' => {
   if (date instanceof Date) {

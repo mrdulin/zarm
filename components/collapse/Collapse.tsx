@@ -2,7 +2,9 @@ import React, { Component, cloneElement, Children } from 'react';
 import type { HTMLAttributes, ReactElement } from 'react';
 import classnames from 'classnames';
 import type { CollapseActiveKey, CollapseItemKey, BaseCollapseProps } from './PropsType';
-import CollapseItem from './CollapseItem';
+// eslint-disable-next-line import/no-duplicates
+import type CollapseItem from './CollapseItem';
+// eslint-disable-next-line import/no-duplicates
 import type { CollapseItemProps } from './CollapseItem';
 
 export interface CollapseProps

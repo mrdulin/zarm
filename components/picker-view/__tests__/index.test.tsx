@@ -5,7 +5,7 @@ import BScroll from 'better-scroll';
 import { mocked } from 'ts-jest/utils';
 import Wheel from '../../wheel';
 import PickerView from '../index';
-import { DataSource } from '../PropsType';
+import type { DataSource } from '../PropsType';
 import parseProps from '../utils/parseProps';
 
 // TODO: make mock package for better-scroll package

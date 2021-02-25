@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import type PropsType from './PropsType';
 // eslint-disable-next-line import/no-duplicates
 import type { ImageSrc } from './PropsType';
+
 import Popup from '../popup';
 import Carousel from '../carousel';
 import PinchZoom from '../pinch-zoom';

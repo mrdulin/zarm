@@ -1,6 +1,6 @@
 import getFileDetail from './getFileDetail';
 import createThumbnail from './createThumbnail';
-import { IFileDetail } from '../index';
+import type { IFileDetail } from '../index';
 
 /**
  * handle single file and get file info

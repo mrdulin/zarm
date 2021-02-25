@@ -4,9 +4,9 @@ import classNames from 'classnames';
 import Popup from '../popup';
 import Actions from './Actions';
 // eslint-disable-next-line import/no-duplicates
-import type { TDataSource, IDataSource } from './PropsType';
-// eslint-disable-next-line import/no-duplicates
 import type PropsType from './PropsType';
+// eslint-disable-next-line import/no-duplicates
+import type { TDataSource, IDataSource } from './PropsType';
 
 const stopPropagation = (e: MouseEvent) => {
   e.stopPropagation();
