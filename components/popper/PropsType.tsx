@@ -1,5 +1,5 @@
-import React from 'react';
-import { ContainerType } from '../utils/dom';
+import type { ReactNode } from 'react';
+import type { ContainerType } from '../utils/dom';
 
 export type PopperPlacement =
   | 'top'
@@ -27,7 +27,7 @@ export default interface BasePopperProps {
   animationDuration?: number;
   // popperOptions?: PopperJS.PopperOptions;
   // modifiers?: PopperJS.Modifiers;
-  content?: React.ReactNode;
+  content?: ReactNode;
   destroy?: boolean;
   mountContainer?: ContainerType;
   mouseEnterDelay?: number;

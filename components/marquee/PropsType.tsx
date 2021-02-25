@@ -1,4 +1,4 @@
-import React from 'react';
+import type { CSSProperties } from 'react';
 
 export default interface PropsType {
   direction: 'left' | 'right' | 'up' | 'down';
@@ -7,5 +7,5 @@ export default interface PropsType {
   loop?: boolean;
   animationDuration?: number;
   animationDelay?: number;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }

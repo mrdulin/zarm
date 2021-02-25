@@ -1,6 +1,7 @@
-import React, { PureComponent, HTMLAttributes } from 'react';
+import React, { PureComponent } from 'react';
+import type { HTMLAttributes } from 'react';
 import classnames from 'classnames';
-import PropsType from './PropsType';
+import type PropsType from './PropsType';
 import { DIRECTION_LEFT, DIRECTION_RIGHT, DIRECTION_UP, DIRECTION_DOWN } from './constants';
 import { getKeyFrameModifier, animationModifier } from './modifiers';
 
@@ -123,8 +124,19 @@ export default class Marquee extends PureComponent<MarqueeProps, {}> {
 
     return (
       <div className={cls}>
-        <div className={`${prefixCls}__body`} ref={(el) => { this.container = el; }} style={style}>
-          <div className={`${prefixCls}__content`} ref={(el) => { this.scrollItem = el; }}>
+        <div
+          className={`${prefixCls}__body`}
+          ref={(el) => {
+            this.container = el;
+          }}
+          style={style}
+        >
+          <div
+            className={`${prefixCls}__content`}
+            ref={(el) => {
+              this.scrollItem = el;
+            }}
+          >
             {children}
           </div>
         </div>

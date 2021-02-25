@@ -1,7 +1,8 @@
-import React, { HTMLAttributes, PureComponent, cloneElement, ReactNode, isValidElement, ChangeEvent } from 'react';
+import React, { PureComponent, cloneElement, isValidElement } from 'react';
+import type { HTMLAttributes, ReactNode, ChangeEvent } from 'react';
 import classnames from 'classnames';
-import { BaseRadioGroupProps, RadioValue } from './PropsType';
-import { Nullable } from '../utils/utilityTypes';
+import type { BaseRadioGroupProps, RadioValue } from './PropsType';
+import type { Nullable } from '../utils/utilityTypes';
 
 const getChildChecked = (children: ReactNode): Nullable<RadioValue> => {
   let checkedValue = null;

@@ -1,4 +1,4 @@
-import { ReactNode, CSSProperties } from 'react';
+import type { ReactNode, CSSProperties } from 'react';
 
 export default interface PropsType {
   direction?: 'left' | 'right' | 'up' | 'down';

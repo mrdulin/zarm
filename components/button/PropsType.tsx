@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 export type ButtonTheme = 'default' | 'primary' | 'danger';
 export type ButtonSize = 'lg' | 'md' | 'sm' | 'xs';

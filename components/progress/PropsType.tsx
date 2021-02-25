@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 
 export type KnownSize = 'lg' | 'md' | 'sm';
 export type ProgressTheme = 'primary' | 'success' | 'warning' | 'danger';

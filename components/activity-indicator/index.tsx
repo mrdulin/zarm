@@ -1,6 +1,7 @@
-import React, { PureComponent, CSSProperties } from 'react';
+import React, { PureComponent } from 'react';
+import type { CSSProperties } from 'react';
 import classnames from 'classnames';
-import PropsType from './PropsType';
+import type PropsType from './PropsType';
 
 const DIAMETER = 62;
 
@@ -18,7 +19,7 @@ const Circular = (props: ActivityIndicatorProps) => {
   });
 
   const half = DIAMETER / 2;
-  const r = half - (strokeWidth as number / 2);
+  const r = half - (strokeWidth as number) / 2;
   const round = 2 * Math.PI * r;
   const lineStyle = {
     strokeDasharray: `${(round * (percent as number)) / 100} ${round}`,
@@ -57,7 +58,9 @@ const Spinner = (props: ActivityIndicatorProps) => {
   }
 
   return (
-    <div className={cls} style={style}>{spinner}</div>
+    <div className={cls} style={style}>
+      {spinner}
+    </div>
   );
 };
 
@@ -72,6 +75,6 @@ export default class ActivityIndicator extends PureComponent<ActivityIndicatorPr
 
   render() {
     const { type } = this.props;
-    return (type !== 'spinner' ? <Circular {...this.props} /> : <Spinner {...this.props} />);
+    return type !== 'spinner' ? <Circular {...this.props} /> : <Spinner {...this.props} />;
   }
 }

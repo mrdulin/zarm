@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import classnames from 'classnames';
-import PropsType from './PropsType';
+import type PropsType from './PropsType';
 import Button from '../button';
 import Icon from '../icon';
 import Input from '../input';
-import { InputNumberProps } from '../input/PropsType';
+import type { InputNumberProps } from '../input/PropsType';
 
 const compareValue = (value, max, min) => {
   if (typeof max === 'number') {
@@ -85,10 +85,7 @@ export default class Stepper extends PureComponent<StepperProps, StepperStates> 
   };
 
   static getDerivedStateFromProps(nextProps: StepperProps, prevState: StepperStates) {
-    if (
-      typeof nextProps.value !== 'undefined'
-      && nextProps.value !== prevState.prevPropsValue
-    ) {
+    if (typeof nextProps.value !== 'undefined' && nextProps.value !== prevState.prevPropsValue) {
       const value = getValue(nextProps, 0);
 
       return {
@@ -156,7 +153,7 @@ export default class Stepper extends PureComponent<StepperProps, StepperStates> 
     if (min === null) {
       return false;
     }
-    return (value <= min!) || disabled;
+    return value <= min! || disabled;
   };
 
   isPlusDisabled = () => {
@@ -166,7 +163,7 @@ export default class Stepper extends PureComponent<StepperProps, StepperStates> 
     if (max === null) {
       return false;
     }
-    return (value >= max!) || disabled;
+    return value >= max! || disabled;
   };
 
   render() {
@@ -183,7 +180,7 @@ export default class Stepper extends PureComponent<StepperProps, StepperStates> 
       [`${prefixCls}__input--disabled`]: disableInput,
     });
 
-    const buttonSize = (size === 'lg') ? 'sm' : 'xs';
+    const buttonSize = size === 'lg' ? 'sm' : 'xs';
 
     const inputProps = {
       className: inputCls,
@@ -206,9 +203,7 @@ export default class Stepper extends PureComponent<StepperProps, StepperStates> 
         >
           <Icon type="minus" />
         </Button>
-        <Input
-          {...inputProps as InputNumberProps}
-        />
+        <Input {...(inputProps as InputNumberProps)} />
         <Button
           className={`${prefixCls}__plus`}
           size={buttonSize}

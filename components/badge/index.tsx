@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import classnames from 'classnames';
-import PropsType from './PropsType';
+import type PropsType from './PropsType';
 
 export interface BadgeProps extends PropsType {
   prefixCls?: string;
@@ -26,7 +26,9 @@ export default class Badge extends PureComponent<BadgeProps, {}> {
     return (
       <span className={cls}>
         {children}
-        <sup className={`${prefixCls}__content`} {...others}>{shape !== 'dot' && text}</sup>
+        <sup className={`${prefixCls}__content`} {...others}>
+          {shape !== 'dot' && text}
+        </sup>
       </span>
     );
   }

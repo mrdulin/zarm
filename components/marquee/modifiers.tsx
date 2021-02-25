@@ -1,4 +1,4 @@
-import PropsType from './PropsType';
+import type PropsType from './PropsType';
 
 import { DIRECTION_LEFT, DIRECTION_RIGHT, DIRECTION_UP, DIRECTION_DOWN } from './constants';
 

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import isEqual from 'lodash/isEqual';
 import Popup from '../popup';
 import PickerView from '../picker-view';
-import BasePickerProps from './PropsType';
+import type BasePickerProps from './PropsType';
 import parseProps from '../picker-view/utils/parseProps';
 import removeFnFromProps from '../picker-view/utils/removeFnFromProps';
-import { DataSource } from '../picker-view/PropsType';
-import { WheelValue, WheelItem } from '../wheel/PropsType';
+import type { DataSource } from '../picker-view/PropsType';
+import type { WheelValue, WheelItem } from '../wheel/PropsType';
 
 export interface PickerProps extends BasePickerProps {
   prefixCls?: string;
@@ -36,7 +36,12 @@ export default class Picker extends Component<PickerProps, PickerState> {
   state: PickerState = { ...parseProps.getSource(this.props), stopScroll: false };
 
   static getDerivedStateFromProps(props, state) {
-    if (!isEqual(removeFnFromProps(props, ['onOk', 'onCancel', 'onChange']), removeFnFromProps(state.prevProps, ['onOk', 'onCancel', 'onChange']))) {
+    if (
+      !isEqual(
+        removeFnFromProps(props, ['onOk', 'onCancel', 'onChange']),
+        removeFnFromProps(state.prevProps, ['onOk', 'onCancel', 'onChange']),
+      )
+    ) {
       return {
         prevProps: props,
         ...parseProps.getSource(props),
@@ -88,7 +93,21 @@ export default class Picker extends Component<PickerProps, PickerState> {
   };
 
   render() {
-    const { prefixCls, className, cancelText, okText, title, locale, maskClosable, mountContainer, destroy, onOk, onCancel, visible, ...others } = this.props;
+    const {
+      prefixCls,
+      className,
+      cancelText,
+      okText,
+      title,
+      locale,
+      maskClosable,
+      mountContainer,
+      destroy,
+      onOk,
+      onCancel,
+      visible,
+      ...others
+    } = this.props;
     const { value, stopScroll = false } = this.state;
     const noop = () => {};
     return (
@@ -99,18 +118,22 @@ export default class Picker extends Component<PickerProps, PickerState> {
         mountContainer={mountContainer}
         destroy={destroy}
       >
-        <div className={prefixCls} onClick={(e) => { e.stopPropagation(); }}>
+        <div
+          className={prefixCls}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
           <div className={`${prefixCls}__header`}>
-            <div className={`${prefixCls}__cancel`} onClick={this.onCancel}>{cancelText || locale!.cancelText}</div>
+            <div className={`${prefixCls}__cancel`} onClick={this.onCancel}>
+              {cancelText || locale!.cancelText}
+            </div>
             <div className={`${prefixCls}__title`}>{title || locale!.title}</div>
-            <div className={`${prefixCls}__submit`} onClick={this.onOk}>{okText || locale!.okText}</div>
+            <div className={`${prefixCls}__submit`} onClick={this.onOk}>
+              {okText || locale!.okText}
+            </div>
           </div>
-          <PickerView
-            {...others}
-            value={value}
-            onChange={this.onChange}
-            stopScroll={stopScroll}
-          />
+          <PickerView {...others} value={value} onChange={this.onChange} stopScroll={stopScroll} />
         </div>
       </Popup>
     );

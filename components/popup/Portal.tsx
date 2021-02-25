@@ -1,10 +1,11 @@
-import React, { PureComponent, CSSProperties, ReactPortal } from 'react';
+import React, { PureComponent } from 'react';
+import type { CSSProperties, ReactPortal } from 'react';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 import Events from '../utils/events';
 import { canUseDOM, getMountContainer } from '../utils/dom';
 import Mask from '../mask';
-import PropsType from './PropsType';
+import type PropsType from './PropsType';
 import Trigger from '../trigger';
 
 const IS_REACT_16 = !!ReactDOM.createPortal;

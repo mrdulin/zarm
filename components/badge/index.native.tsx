@@ -1,11 +1,8 @@
-import React, { PureComponent, CSSProperties } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  ViewStyle,
-} from 'react-native';
-import PropsType from './PropsType';
+import React, { PureComponent } from 'react';
+import type { CSSProperties } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
+import type { ViewStyle } from 'react-native';
+import type PropsType from './PropsType';
 import badgeStyle from './style/index.native';
 
 export interface BadgeProps extends PropsType {
@@ -26,7 +23,7 @@ export default class Badge extends PureComponent<BadgeProps, {}> {
   };
 
   layout = (e) => {
-    const dotWidth = (this.props.shape === 'dot' || this.props.shape === undefined)
+    const dotWidth = this.props.shape === 'dot' || this.props.shape === undefined
       ? -(parseInt(e.layout.width, 10) - 4)
       : -(parseInt(e.layout.width, 10) - 8);
 
@@ -36,26 +33,12 @@ export default class Badge extends PureComponent<BadgeProps, {}> {
   };
 
   render() {
-    const {
-      theme,
-      shape,
-      text,
-      style,
-      children,
-      styles,
-    } = this.props;
+    const { theme, shape, text, style, children, styles } = this.props;
     const { dotWidth } = this.state;
 
-    const bagdeWrapper = [
-      styles!.textStyle,
-      style,
-    ] as ViewStyle;
+    const bagdeWrapper = [styles!.textStyle, style] as ViewStyle;
 
-    const badgeText = [
-      styles!.badgeText,
-      styles![`${shape}Text`],
-      shape === undefined && styles!.dotText,
-    ];
+    const badgeText = [styles!.badgeText, styles![`${shape}Text`], shape === undefined && styles!.dotText];
 
     const iconStyle = [
       styles![`${shape}Badge`],
@@ -67,10 +50,7 @@ export default class Badge extends PureComponent<BadgeProps, {}> {
     return (
       <View style={bagdeWrapper}>
         {children}
-        <View
-          onLayout={({ nativeEvent: e }) => this.layout(e)}
-          style={[iconStyle, { right: children ? dotWidth : 0 }]}
-        >
+        <View onLayout={({ nativeEvent: e }) => this.layout(e)} style={[iconStyle, { right: children ? dotWidth : 0 }]}>
           <Text style={badgeText}>{text}</Text>
         </View>
       </View>

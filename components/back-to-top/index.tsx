@@ -1,7 +1,8 @@
-import React, { PureComponent, MouseEvent, CSSProperties, ReactPortal } from 'react';
+import React, { PureComponent } from 'react';
+import type { MouseEvent, CSSProperties, ReactPortal } from 'react';
 import { createPortal } from 'react-dom';
 import classnames from 'classnames';
-import BasePropsType from './PropsType';
+import type BasePropsType from './PropsType';
 import Scroller from '../scroller';
 import { canUseDOM, scrollTo } from '../utils/dom';
 
@@ -61,15 +62,11 @@ export default class BackToTop extends PureComponent<BackToTopProps, BackToTopSt
   }
 
   get container(): HTMLElement | Window {
-    return this.scroller
-      ? this.scroller!.scrollContainer
-      : window;
+    return this.scroller ? this.scroller!.scrollContainer : window;
   }
 
   get scrollTop(): number {
-    return this.scroller
-      ? this.scroller!.scrollTop
-      : 0;
+    return this.scroller ? this.scroller!.scrollTop : 0;
   }
 
   get renderPortal(): ReactPortal | null {
@@ -90,7 +87,9 @@ export default class BackToTop extends PureComponent<BackToTopProps, BackToTopSt
           {children}
         </div>
         <Scroller
-          ref={(ele) => { this.scroller = ele; }}
+          ref={(ele) => {
+            this.scroller = ele;
+          }}
           container={scrollContainer}
           onScroll={this.onScroll}
         />

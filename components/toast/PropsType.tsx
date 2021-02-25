@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { ContainerType } from '../utils/dom';
+import type { ReactNode } from 'react';
+import type { ContainerType } from '../utils/dom';
 
 export default interface PropsType {
   visible?: boolean;

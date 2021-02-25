@@ -1,7 +1,7 @@
 import React from 'react';
 import Popper from '../popper';
-import BaseTooltipProps from './PropsType';
-import { PopperPlacement, PopperTrigger } from '../popper/PropsType';
+import type BaseTooltipProps from './PropsType';
+import type { PopperPlacement, PopperTrigger } from '../popper/PropsType';
 
 export interface TooltipProps extends BaseTooltipProps {
   prefixCls?: string;
@@ -28,16 +28,13 @@ class Tooltip extends React.Component<TooltipProps, any> {
   render() {
     const { children, content, ...others } = this.props;
 
-    return !(content === '' || content === null || content === undefined)
-      ? (
-        <Popper
-          content={content}
-          {...others}
-        >
-          {children}
-        </Popper>
-      )
-      : children;
+    return !(content === '' || content === null || content === undefined) ? (
+      <Popper content={content} {...others}>
+        {children}
+      </Popper>
+    ) : (
+      children
+    );
   }
 }
 

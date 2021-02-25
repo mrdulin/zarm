@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import classnames from 'classnames';
-import { InputTextareaProps } from './PropsType';
-import { getValue } from './utils';
+import type { InputTextareaProps } from './PropsType';
+import getValue from './utils';
 
 const regexAstralSymbols = /[\uD800-\uDBFF][\uDC00-\uDFFF]|\n/g;
 
@@ -143,17 +143,7 @@ export default class InputTextarea extends PureComponent<InputTextareaProps, any
   }
 
   render() {
-    const {
-      prefixCls,
-      className,
-      maxLength,
-      disabled,
-      readOnly,
-      autoHeight,
-      showLength,
-      focused,
-      ...rest
-    } = this.props;
+    const { prefixCls, className, maxLength, disabled, readOnly, autoHeight, showLength, focused, ...rest } = this.props;
 
     const cls = classnames(prefixCls, `${prefixCls}--textarea`, className, {
       [`${prefixCls}--disabled`]: disabled,
@@ -163,32 +153,39 @@ export default class InputTextarea extends PureComponent<InputTextareaProps, any
     const { value } = this.state;
     const length = countSymbols(value);
 
-    const textLengthRender = showLength
-      && maxLength
-      && (
-        <div className={`${prefixCls}__length`}>
-          {`${length}/${maxLength}`}
-        </div>
-      );
+    const textLengthRender = showLength && maxLength && <div className={`${prefixCls}__length`}>{`${length}/${maxLength}`}</div>;
 
     const renderInput = (
       <textarea
         {...rest}
-        value={('value' in this.props) ? value : undefined}
-        ref={(ele) => { this.input = ele; }}
+        value={'value' in this.props ? value : undefined}
+        ref={(ele) => {
+          this.input = ele;
+        }}
         maxLength={maxLength}
         disabled={disabled}
         onChange={this.onChange}
         onFocus={this.onFocus}
         onBlur={this.onBlur}
-        onCompositionStart={(e) => { this.handleComposition(e); }}
-        onCompositionUpdate={(e) => { this.handleComposition(e); }}
-        onCompositionEnd={(e) => { this.handleComposition(e); }}
+        onCompositionStart={(e) => {
+          this.handleComposition(e);
+        }}
+        onCompositionUpdate={(e) => {
+          this.handleComposition(e);
+        }}
+        onCompositionEnd={(e) => {
+          this.handleComposition(e);
+        }}
       />
     );
 
     const renderText = (
-      <div className={`${prefixCls}__content`} ref={(ele) => { this.input = ele; }}>
+      <div
+        className={`${prefixCls}__content`}
+        ref={(ele) => {
+          this.input = ele;
+        }}
+      >
         {value}
       </div>
     );

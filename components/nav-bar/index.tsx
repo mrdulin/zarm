@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import BaseNavBarProps from './PropsType';
+import type BaseNavBarProps from './PropsType';
 
 export interface NavBarProps extends BaseNavBarProps {
   prefixCls?: string;
@@ -15,14 +15,7 @@ export default class NavBar extends React.PureComponent<NavBarProps> {
   };
 
   render() {
-    const {
-      prefixCls,
-      className,
-      style,
-      title,
-      left,
-      right,
-    } = this.props;
+    const { prefixCls, className, style, title, left, right } = this.props;
     const cls = classnames(prefixCls, className);
     const titleCls = `${prefixCls}__title`;
     const sideCls = `${prefixCls}__side`;

@@ -1,4 +1,4 @@
-import React from 'react';
+import type { CSSProperties } from 'react';
 
 export interface BaseInputProps {
   placeholder?: string;
@@ -7,7 +7,7 @@ export interface BaseInputProps {
   maxLength?: number;
   focused?: boolean;
   autoFocus?: boolean;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   prefixCls?: string;
   className?: string;
 }

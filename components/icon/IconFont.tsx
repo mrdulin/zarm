@@ -1,5 +1,7 @@
-import React, { ReactNode, FunctionComponent } from 'react';
-import Icon, { IconProps } from './index';
+import React, { FunctionComponent } from 'react';
+import type { ReactNode } from 'react';
+import Icon from './index';
+import type { IconProps } from './index';
 
 const customCache = new Set<string>();
 
@@ -34,11 +36,7 @@ export default function createFromIconfont(scriptUrl: string): FunctionComponent
     if (type) {
       content = <use xlinkHref={`#${type}`} />;
     }
-    return (
-      <Icon {...props}>
-        {content}
-      </Icon>
-    );
+    return <Icon {...props}>{content}</Icon>;
   };
 
   return Iconfont;

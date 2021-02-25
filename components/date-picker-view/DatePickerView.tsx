@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import isEqual from 'lodash/isEqual';
-import BaseDatePickerViewProps from './PropsType';
+import type BaseDatePickerViewProps from './PropsType';
 import PickerView from '../picker-view';
 import removeFnFromProps from '../picker-view/utils/removeFnFromProps';
 import { isExtendDate, parseState } from './utils/parseState';

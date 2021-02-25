@@ -1,6 +1,7 @@
-import React, { PureComponent, MouseEventHandler, AnchorHTMLAttributes, ButtonHTMLAttributes } from 'react';
+import React, { PureComponent } from 'react';
+import type { MouseEventHandler, AnchorHTMLAttributes, ButtonHTMLAttributes } from 'react';
 import classnames from 'classnames';
-import BasePropsType from './PropsType';
+import type BasePropsType from './PropsType';
 import ActivityIndicator from '../activity-indicator';
 
 interface BaseButtonPropsType extends BasePropsType {
@@ -10,11 +11,13 @@ interface BaseButtonPropsType extends BasePropsType {
 
 export type AnchorButtonProps = {
   mimeType?: string;
-} & BaseButtonPropsType & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'type' | 'onClick'>;
+} & BaseButtonPropsType &
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'type' | 'onClick'>;
 
 export type NativeButtonProps = {
   htmlType?: 'button' | 'submit' | 'reset';
-} & BaseButtonPropsType & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type' | 'onClick'>;
+} & BaseButtonPropsType &
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type' | 'onClick'>;
 
 export type ButtonProps = Partial<AnchorButtonProps & NativeButtonProps>;
 
@@ -72,20 +75,18 @@ export default class Button extends PureComponent<ButtonProps, {}> {
       [`${prefixCls}--disabled`]: !!disabled,
     });
 
-    const iconRender = loading
-      ? <ActivityIndicator />
-      : icon;
+    const iconRender = loading ? <ActivityIndicator /> : icon;
 
     const childrenRender = children && <span>{children}</span>;
 
-    const contentRender = (!!icon || loading)
-      ? (
-        <div className={`${prefixCls}__content`}>
-          {iconRender}
-          {childrenRender}
-        </div>
-      )
-      : childrenRender;
+    const contentRender = !!icon || loading ? (
+      <div className={`${prefixCls}__content`}>
+        {iconRender}
+        {childrenRender}
+      </div>
+    ) : (
+      childrenRender
+    );
 
     if ((rest as AnchorButtonProps).href !== undefined) {
       const { htmlType, ...filteredRest } = rest;
@@ -93,13 +94,7 @@ export default class Button extends PureComponent<ButtonProps, {}> {
       cls = classnames(cls, `${prefixCls}--link`);
 
       return (
-        <a
-          {...anchorRest}
-          type={mimeType}
-          aria-disabled={disabled}
-          className={cls}
-          onClick={this.onClick}
-        >
+        <a {...anchorRest} type={mimeType} aria-disabled={disabled} className={cls} onClick={this.onClick}>
           {contentRender}
         </a>
       );
@@ -109,13 +104,7 @@ export default class Button extends PureComponent<ButtonProps, {}> {
     const { htmlType, ...nativeRest } = filteredRest as NativeButtonProps;
 
     return (
-      <button
-        {...nativeRest}
-        type={htmlType}
-        aria-disabled={disabled}
-        className={cls}
-        onClick={this.onClick}
-      >
+      <button {...nativeRest} type={htmlType} aria-disabled={disabled} className={cls} onClick={this.onClick}>
         {contentRender}
       </button>
     );

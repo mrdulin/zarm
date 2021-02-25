@@ -1,4 +1,5 @@
-import React, { PureComponent, ReactNode } from 'react';
+import React, { PureComponent } from 'react';
+import type { ReactNode } from 'react';
 import classnames from 'classnames';
 
 export interface TabPanelProps {
@@ -41,6 +42,10 @@ export default class TabPanel extends PureComponent<TabPanelProps, TabPanelState
       [`${prefixCls}__panel--active`]: selected,
     });
 
-    return <div className={cls} role="tabpanel">{children}</div>;
+    return (
+      <div className={cls} role="tabpanel">
+        {children}
+      </div>
+    );
   }
 }

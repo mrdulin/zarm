@@ -1,6 +1,10 @@
-import React, { CSSProperties, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
+import type { CSSProperties } from 'react';
 import classnames from 'classnames';
-import ProgressProps, { KnownSize } from './PropsType';
+// eslint-disable-next-line import/no-duplicates
+import type ProgressProps from './PropsType';
+// eslint-disable-next-line import/no-duplicates
+import type { KnownSize } from './PropsType';
 
 type WeightMap = {
   [weight in KnownSize]: number;
@@ -54,7 +58,7 @@ export default class Progress extends PureComponent<ProgressProps, any> {
   get strokeWidth() {
     const { strokeWidth, size } = this.props;
     const { strokeWeights } = Progress;
-    const backup = strokeWeights[(size && (size in strokeWeights)) ? size : 'md'];
+    const backup = strokeWeights[size && size in strokeWeights ? size : 'md'];
     return Math.max(1, strokeWidth || backup);
   }
 
@@ -68,10 +72,21 @@ export default class Progress extends PureComponent<ProgressProps, any> {
   }
 
   render() {
-    const { theme, percent, strokeShape, shape, size, style, prefixCls, className, children, text: format } = this.props;
+    const {
+      theme,
+      percent,
+      strokeShape,
+      shape,
+      size,
+      style,
+      prefixCls,
+      className,
+      children,
+      text: format,
+    } = this.props;
     const { state } = this;
     const strokeWidth = this.useSVG ? state.svgStrokeWidth : this.strokeWidth;
-    const hasKnownSize = size && (size in Progress.strokeWeights);
+    const hasKnownSize = size && size in Progress.strokeWeights;
 
     const cls = classnames(prefixCls, className, {
       [`${prefixCls}--${shape}`]: !!shape,
@@ -114,9 +129,7 @@ export default class Progress extends PureComponent<ProgressProps, any> {
         m${-radius} 0
         a${radius} ${radius} 0 0 1 ${diameter} 0`;
 
-    const dasharray = shape === 'circle'
-      ? Math.PI * diameter
-      : (Math.PI * diameter) / 2;
+    const dasharray = shape === 'circle' ? Math.PI * diameter : (Math.PI * diameter) / 2;
 
     const borderRadius = strokeShape === 'round' ? `${this.strokeWidth}px` : '0';
     const lineTrackStyle = { height: `${strokeWidth}`, borderRadius };
@@ -127,12 +140,7 @@ export default class Progress extends PureComponent<ProgressProps, any> {
     const roundInner = (shape === 'circle' || shape === 'semi-circle') && (
       <>
         <svg viewBox={viewBox}>
-          <path
-            className={`${prefixCls}__track`}
-            d={path}
-            strokeWidth={strokeWidth}
-            strokeLinecap={strokeLinecap}
-          />
+          <path className={`${prefixCls}__track`} d={path} strokeWidth={strokeWidth} strokeLinecap={strokeLinecap} />
           <path
             className={`${prefixCls}__thumb`}
             d={path}
@@ -146,23 +154,22 @@ export default class Progress extends PureComponent<ProgressProps, any> {
       </>
     );
 
-    const rectInner = (
-      shape === 'line'
-      && (
-        <div className={`${prefixCls}__outer`}>
-          <div className={`${prefixCls}__track`} style={lineTrackStyle}>
-            <div className={`${prefixCls}__thumb`} style={lineThumbStyle} />
-          </div>
-          {hasIndicator && <div className={`${prefixCls}__text`}>{children || formattedPercent}</div>}
+    const rectInner = shape === 'line' && (
+      <div className={`${prefixCls}__outer`}>
+        <div className={`${prefixCls}__track`} style={lineTrackStyle}>
+          <div className={`${prefixCls}__thumb`} style={lineThumbStyle} />
         </div>
-      )
+        {hasIndicator && <div className={`${prefixCls}__text`}>{children || formattedPercent}</div>}
+      </div>
     );
 
     return (
       <div
         className={cls}
         style={{ ...sizeStyle, ...style }}
-        ref={(ele) => { this.progressElement = ele; }}
+        ref={(ele) => {
+          this.progressElement = ele;
+        }}
       >
         {shape === 'line' ? rectInner : roundInner}
       </div>

@@ -1,6 +1,8 @@
-import React, { PureComponent, CSSProperties } from 'react';
-import { StyleSheet, View, ViewStyle } from 'react-native';
-import { BasePanelProps } from './PropsType';
+import React, { PureComponent } from 'react';
+import type { CSSProperties } from 'react';
+import { StyleSheet, View } from 'react-native';
+import type { ViewStyle } from 'react-native';
+import type { BasePanelProps } from './PropsType';
 import panelStyle from './style/index.native';
 import { RenderWithText } from '../utils/renderWithText.native';
 
@@ -19,18 +21,11 @@ export default class Panel extends PureComponent<PanelProps, {}> {
   render() {
     const { title, more, style, styles, children } = this.props;
 
-    const wrapperStyle = [
-      styles!.container,
-      style,
-    ] as ViewStyle;
+    const wrapperStyle = [styles!.container, style] as ViewStyle;
 
-    const headerStyle = [
-      styles!.panelHeader,
-    ] as ViewStyle;
+    const headerStyle = [styles!.panelHeader] as ViewStyle;
 
-    const bodyStyle = [
-      styles!.panelBody,
-    ] as ViewStyle;
+    const bodyStyle = [styles!.panelBody] as ViewStyle;
 
     return (
       <View style={wrapperStyle}>
@@ -46,9 +41,7 @@ export default class Panel extends PureComponent<PanelProps, {}> {
             textStyle={panelStyles.panelHeaderMoreText}
           />
         </View>
-        <View style={bodyStyle}>
-          {children}
-        </View>
+        <View style={bodyStyle}>{children}</View>
       </View>
     );
   }

@@ -1,6 +1,6 @@
 import React, { PureComponent, cloneElement } from 'react';
 import classnames from 'classnames';
-import { BaseTabBarProps } from './PropsType';
+import type { BaseTabBarProps } from './PropsType';
 import TabBarItem from './TabBarItem';
 
 export interface TabBarProps extends BaseTabBarProps {
@@ -53,7 +53,11 @@ class TabBar extends PureComponent<TabBarProps, any> {
         selected: this.getSelected(index, element.props.itemKey),
       });
     });
-    return <div className={cls} style={style}>{items}</div>;
+    return (
+      <div className={cls} style={style}>
+        {items}
+      </div>
+    );
   }
 }
 

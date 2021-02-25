@@ -1,7 +1,9 @@
-import React, { PureComponent, CSSProperties, ReactElement } from 'react';
+import React, { PureComponent } from 'react';
+import type { CSSProperties, ReactElement } from 'react';
 import classnames from 'classnames';
-import PropsType from './PropsType';
-import TabPanel, { TabPanelProps } from './TabPanel';
+import type PropsType from './PropsType';
+import TabPanel from './TabPanel';
+import type { TabPanelProps } from './TabPanel';
 import Carousel from '../carousel';
 import { getTransformPropValue, getPxStyle } from './util/index';
 import { scrollTo } from '../utils/dom';
@@ -133,12 +135,7 @@ export default class Tabs extends PureComponent<TabsProps, TabsStates> {
       [`${prefixCls}__tab--active`]: value === index,
     });
     return (
-      <li
-        role="tab"
-        key={+index}
-        className={itemCls}
-        onClick={() => this.onTabClick(tab, index)}
-      >
+      <li role="tab" key={+index} className={itemCls} onClick={() => this.onTabClick(tab, index)}>
         {tab.props.title}
       </li>
     );
@@ -234,7 +231,9 @@ export default class Tabs extends PureComponent<TabsProps, TabsStates> {
             this.onTabChange(v);
           }}
         >
-          {React.Children.map(children, (item: any, index: number) => <div key={+index}>{item.props.children}</div>)}
+          {React.Children.map(children, (item: any, index: number) => (
+            <div key={+index}>{item.props.children}</div>
+          ))}
         </Carousel>
       );
     } else {
@@ -256,12 +255,12 @@ export default class Tabs extends PureComponent<TabsProps, TabsStates> {
         <div className={`${prefixCls}__header`}>
           <ul className={`${prefixCls}__tablist`} role="tablist" ref={this.setTablistRef}>
             {tabsRender}
-            <div className={`${prefixCls}__line`} style={lineStyle}>{lineInnerRender}</div>
+            <div className={`${prefixCls}__line`} style={lineStyle}>
+              {lineInnerRender}
+            </div>
           </ul>
         </div>
-        <div className={`${prefixCls}__body`}>
-          {contentRender}
-        </div>
+        <div className={`${prefixCls}__body`}>{contentRender}</div>
       </div>
     );
   }

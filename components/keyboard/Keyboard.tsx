@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import classnames from 'classnames';
-import PropsType from './PropsType';
+import type PropsType from './PropsType';
 import Icon from '../icon';
 
 const KEYS = {
@@ -60,12 +60,8 @@ export default class Keyboard extends PureComponent<KeyboardProps, {}> {
     });
 
     return (
-      <div
-        className={keyCls}
-        key={+index}
-        onClick={() => this.onKeyClick(text)}
-      >
-        {(text === 'close') ? <Icon type="keyboard" size="lg" /> : text}
+      <div className={keyCls} key={+index} onClick={() => this.onKeyClick(text)}>
+        {text === 'close' ? <Icon type="keyboard" size="lg" /> : text}
       </div>
     );
   };
@@ -74,9 +70,7 @@ export default class Keyboard extends PureComponent<KeyboardProps, {}> {
     const { prefixCls, locale } = this.props;
     return (
       <div className={prefixCls}>
-        <div className={`${prefixCls}__keys`}>
-          {this.getKeys().map(this.renderKey)}
-        </div>
+        <div className={`${prefixCls}__keys`}>{this.getKeys().map(this.renderKey)}</div>
         <div className={`${prefixCls}__handle`}>
           <div
             className={`${prefixCls}__item`}
@@ -88,10 +82,7 @@ export default class Keyboard extends PureComponent<KeyboardProps, {}> {
           >
             <Icon type="deletekey" size="lg" />
           </div>
-          <div
-            className={`${prefixCls}__item ${prefixCls}__item--ok`}
-            onClick={() => this.onKeyClick('ok')}
-          >
+          <div className={`${prefixCls}__item ${prefixCls}__item--ok`} onClick={() => this.onKeyClick('ok')}>
             {locale!.okText}
           </div>
         </div>

@@ -1,12 +1,8 @@
-import React, { PureComponent, CSSProperties } from 'react';
-import {
-  View,
-  ViewStyle,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  GestureResponderEvent,
-} from 'react-native';
-import PropsType from './PropsType';
+import React, { PureComponent } from 'react';
+import type { CSSProperties } from 'react';
+import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import type { GestureResponderEvent, ViewStyle } from 'react-native';
+import type PropsType from './PropsType';
 import messageStyle from './style/index.native';
 import { RenderWithText } from '../utils/renderWithText.native';
 
@@ -43,37 +39,15 @@ export default class Message extends PureComponent<MessageProps, MessageState> {
   };
 
   render() {
-    const {
-      theme,
-      icon,
-      hasArrow,
-      closable,
-      styles,
-      style,
-      onClick,
-      children,
-      size,
-    } = this.props;
+    const { theme, icon, hasArrow, closable, styles, style, onClick, children, size } = this.props;
 
     const { visible } = this.state;
 
-    const wrapperStyle = [
-      styles!.wrapper,
-      styles![`${theme}Wrapper`],
-      styles![`${size}Wrapper`],
-      style,
-    ] as ViewStyle;
+    const wrapperStyle = [styles!.wrapper, styles![`${theme}Wrapper`], styles![`${size}Wrapper`], style] as ViewStyle;
 
-    const textStyle = [
-      styles![`${theme}TextStyle`],
-      styles![`${size}TextStyle`],
-    ];
+    const textStyle = [styles![`${theme}TextStyle`], styles![`${size}TextStyle`]];
 
-    const arrowStyle = [
-      styles!.arrowStyle,
-      styles![`${theme}ArrowStyle`],
-      styles![`${size}ArrowStyle`],
-    ];
+    const arrowStyle = [styles!.arrowStyle, styles![`${theme}ArrowStyle`], styles![`${size}ArrowStyle`]];
 
     const closeIconStyle = [
       styles!.closeIconStyle,
@@ -82,9 +56,7 @@ export default class Message extends PureComponent<MessageProps, MessageState> {
     ];
 
     const closeRender = closable && (
-      <TouchableWithoutFeedback
-        onPress={this.onPressClose}
-      >
+      <TouchableWithoutFeedback onPress={this.onPressClose}>
         <View style={styles!.closeIconWrapperStyle as ViewStyle}>
           <View style={[closeIconStyle, styles!.closeIconLeft]} />
           <View style={[closeIconStyle, styles!.closeIconRight]} />
@@ -108,11 +80,7 @@ export default class Message extends PureComponent<MessageProps, MessageState> {
     const messageRender = (
       <View style={wrapperStyle}>
         {icon && <View style={styles!.headerStyle as ViewStyle} />}
-        <RenderWithText
-          viewStyle={styles!.bodyStyle as ViewStyle}
-          textStyle={textStyle}
-          component={children}
-        />
+        <RenderWithText viewStyle={styles!.bodyStyle as ViewStyle} textStyle={textStyle} component={children} />
         {footerRender}
       </View>
     );
@@ -121,10 +89,9 @@ export default class Message extends PureComponent<MessageProps, MessageState> {
       onPress: onClick,
     };
 
-    return visible && (
-      onClick
-        ? <TouchableWithoutFeedback {...wrapperProps}>{messageRender}</TouchableWithoutFeedback>
-        : messageRender
+    return (
+      visible
+      && (onClick ? <TouchableWithoutFeedback {...wrapperProps}>{messageRender}</TouchableWithoutFeedback> : messageRender)
     );
   }
 }

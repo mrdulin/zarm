@@ -2,7 +2,8 @@ import React from 'react';
 import { render, mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { mocked } from 'ts-jest/utils';
-import FilePicker, { IFileDetail } from '../index';
+import FilePicker from '../index';
+import type { IFileDetail } from '../index';
 import { mockCreateObjectURL } from '../../../tests/utils';
 import handleFileInfo from '../utils/handleFileInfo';
 

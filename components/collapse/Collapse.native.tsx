@@ -1,9 +1,11 @@
-import React, { Component, CSSProperties, Children, cloneElement, ReactElement } from 'react';
-import { StyleSheet, View, ViewStyle } from 'react-native';
-import { BaseCollapseProps } from './PropsType';
+import React, { Component, cloneElement, Children } from 'react';
+import type { CSSProperties, ReactElement } from 'react';
+import { StyleSheet, View } from 'react-native';
+import type { ViewStyle } from 'react-native';
+import type { BaseCollapseProps } from './PropsType';
 import collapaseStyle from './style/index.native';
 import { isArray } from '../utils/validate';
-import { CollapseItemProps } from './CollapseItem.native';
+import type { CollapseItemProps } from './CollapseItem.native';
 
 export interface CollapseProps extends BaseCollapseProps {
   style?: CSSProperties;
@@ -23,13 +25,11 @@ const isPropEqual = (cur, next) => {
 const getActiveKey = (props) => {
   const { activeKey, defaultActiveKey, multiple } = props;
 
-  const defaultKey = (activeKey || activeKey === 0) ? activeKey : defaultActiveKey;
+  const defaultKey = activeKey || activeKey === 0 ? activeKey : defaultActiveKey;
 
   if (defaultKey || defaultKey === 0) {
     if (isArray(defaultKey)) {
-      return !multiple
-        ? [String(defaultKey[0])]
-        : (defaultKey as Array<any>).map((key) => String(key));
+      return !multiple ? [String(defaultKey[0])] : (defaultKey as Array<any>).map((key) => String(key));
     }
     return [String(defaultKey)];
   }
@@ -41,7 +41,7 @@ export default class Collapse extends Component<CollapseProps, any> {
     multiple: false,
     animated: false,
     styles: collapseStyles,
-    onChange: () => { },
+    onChange: () => {},
   };
 
   static Item: any;
@@ -111,7 +111,7 @@ export default class Collapse extends Component<CollapseProps, any> {
         key: key!,
         isActive,
         animated,
-        onChange: disabled ? () => { } : () => this.onChange(onChange, key),
+        onChange: disabled ? () => {} : () => this.onChange(onChange, key),
       });
     });
   }
@@ -119,15 +119,8 @@ export default class Collapse extends Component<CollapseProps, any> {
   render() {
     const { style, styles } = this.props;
 
-    const wrapperStyle = [
-      styles!.container,
-      style,
-    ] as ViewStyle;
+    const wrapperStyle = [styles!.container, style] as ViewStyle;
 
-    return (
-      <View style={wrapperStyle}>
-        {this.renderItems()}
-      </View>
-    );
+    return <View style={wrapperStyle}>{this.renderItems()}</View>;
   }
 }

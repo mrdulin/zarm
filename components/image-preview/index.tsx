@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import PropsType, { ImageSrc } from './PropsType';
+// eslint-disable-next-line import/no-duplicates
+import type PropsType from './PropsType';
+// eslint-disable-next-line import/no-duplicates
+import type { ImageSrc } from './PropsType';
 import Popup from '../popup';
 import Carousel from '../carousel';
 import PinchZoom from '../pinch-zoom';
 import ActivityIndicator from '../activity-indicator';
 import { isObject, isString } from '../utils/validate';
 import ConfigReceiver from '../config-receiver';
-import { Locale } from '../config-provider/PropsType';
+import type { Locale } from '../config-provider/PropsType';
 
 export interface ImagePreviewProps extends PropsType {
   prefixCls?: string;
@@ -97,13 +100,16 @@ class ImagePreview extends Component<ImagePreviewProps, ImagePreviewState> {
 
   onChange = (index) => {
     const { onChange } = this.props;
-    this.setState({
-      currentIndex: index,
-    }, () => {
-      if (typeof onChange === 'function') {
-        onChange(index);
-      }
-    });
+    this.setState(
+      {
+        currentIndex: index,
+      },
+      () => {
+        if (typeof onChange === 'function') {
+          onChange(index);
+        }
+      },
+    );
   };
 
   close = () => {
@@ -198,11 +204,7 @@ class ImagePreview extends Component<ImagePreviewProps, ImagePreviewState> {
     return images.map((item, i) => {
       return (
         <div className={`${prefixCls}__item`} key={+i}>
-          <PinchZoom
-            className={`${prefixCls}__item__img`}
-            minScale={minScale}
-            maxScale={maxScale}
-          >
+          <PinchZoom className={`${prefixCls}__item__img`} minScale={minScale} maxScale={maxScale}>
             <img src={item.url} alt="" draggable={false} />
           </PinchZoom>
         </div>
@@ -227,24 +229,28 @@ class ImagePreview extends Component<ImagePreviewProps, ImagePreviewState> {
           onMouseUp={this.onWrapperMouseUp}
           onClick={this.close}
         >
-          <Carousel
-            showPagination={false}
-            onChange={this.onChange}
-            activeIndex={currentIndex}
-          >
+          <Carousel showPagination={false} onChange={this.onChange} activeIndex={currentIndex}>
             {visible ? this.renderImages() : []}
           </Carousel>
         </div>
         <div className={`${prefixCls}__footer`}>
-          {loaded && this.showOriginButton(images, activeIndex) && (loaded !== LOAD_STATUS.after)
-            ? (
-              <button className={`${prefixCls}__origin__button`} onClick={this.loadOrigin}>
-                {loaded === LOAD_STATUS.start ? <ActivityIndicator className={`${prefixCls}__loading`} type="spinner" /> : ''}
-                {locale![loaded]}
-              </button>
-            )
-            : ''}
-          {visible && showPagination && images && images.length > 1 && <div className={`${prefixCls}__index`}>{currentIndex + 1} / {images.length}</div>}
+          {loaded && this.showOriginButton(images, activeIndex) && loaded !== LOAD_STATUS.after ? (
+            <button className={`${prefixCls}__origin__button`} onClick={this.loadOrigin}>
+              {loaded === LOAD_STATUS.start ? (
+                <ActivityIndicator className={`${prefixCls}__loading`} type="spinner" />
+              ) : (
+                ''
+              )}
+              {locale![loaded]}
+            </button>
+          ) : (
+            ''
+          )}
+          {visible && showPagination && images && images.length > 1 && (
+            <div className={`${prefixCls}__index`}>
+              {currentIndex + 1} / {images.length}
+            </div>
+          )}
         </div>
       </Popup>
     );

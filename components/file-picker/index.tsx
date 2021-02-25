@@ -9,9 +9,10 @@
  * onChange: () => { file, fileType, fileSize, fileName, thumbnail }。
  * onBeforeSelect: () => boolean，返回 false 的时候阻止后续的选择事件。
  */
-import React, { PureComponent, cloneElement, MouseEventHandler, ChangeEventHandler } from 'react';
+import React, { PureComponent, cloneElement } from 'react';
+import type { MouseEventHandler, ChangeEventHandler } from 'react';
 import classNames from 'classnames';
-import PropsType from './PropsType';
+import type PropsType from './PropsType';
 import handleFileInfo from './utils/handleFileInfo';
 
 export interface FilePickerProps extends PropsType {

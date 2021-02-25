@@ -1,6 +1,6 @@
 import React, { Component, isValidElement } from 'react';
 import classnames from 'classnames';
-import { BaseCalendarMonthProps } from './PropsType';
+import type { BaseCalendarMonthProps } from './PropsType';
 import DateTool from '../utils/date';
 
 export interface CalendarMonthProps extends BaseCalendarMonthProps {

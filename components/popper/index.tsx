@@ -1,11 +1,16 @@
-import React, { HTMLAttributes } from 'react';
+import React from 'react';
+import type { HTMLAttributes } from 'react';
 import ReactDOM, { createPortal } from 'react-dom';
 import PopperJS from 'popper.js';
 import classnames from 'classnames';
 
 import ClickOutside from '../click-outside';
 import { canUseDOM, getOuterSizes } from '../utils/dom';
-import BasePopperProps, { PopperPlacement, directionMap } from './PropsType';
+import { directionMap } from './PropsType';
+// eslint-disable-next-line import/no-duplicates
+import type BasePopperProps from './PropsType';
+// eslint-disable-next-line import/no-duplicates
+import type { PopperPlacement } from './PropsType';
 import Events from '../utils/events';
 
 export interface PopperProps extends BasePopperProps, HTMLAttributes<HTMLDivElement> {
@@ -60,8 +65,10 @@ const setTransformOrigin = (domNode) => {
 
 const customArrowOffsetFn = (data: PopperJS.Data) => {
   const [placement, placement1] = data.placement.split('-');
-  const arrow = data.instance.options.modifiers && data.instance.options.modifiers!.arrow!.element as Element;
-  const { offsets: { reference } } = data;
+  const arrow = data.instance.options.modifiers && (data.instance.options.modifiers!.arrow!.element as Element);
+  const {
+    offsets: { reference },
+  } = data;
   const popper = getPopperClientRect(data.offsets.popper);
   const isVertical = ['left', 'right'].indexOf(placement) !== -1;
   const len = isVertical ? 'height' : 'width';
@@ -71,13 +78,10 @@ const customArrowOffsetFn = (data: PopperJS.Data) => {
   const arrowSize = getOuterSizes(arrow as HTMLElement)[len];
   const offsetSize = parseFloat(getComputedStyle(data.instance.popper, null).paddingLeft!);
   const hashMap = {
-    start: (side === 'top' || side === 'left')
-      ? (reference[side] + offsetSize)
-      : (reference[opSide] - offsetSize - arrowSize),
+    start:
+      side === 'top' || side === 'left' ? reference[side] + offsetSize : reference[opSide] - offsetSize - arrowSize,
     center: reference[side] + reference[len] / 2 - arrowSize / 2,
-    end: (side === 'top' || side === 'left')
-      ? (reference[opSide] - offsetSize - arrowSize)
-      : (reference[side] + offsetSize),
+    end: side === 'top' || side === 'left' ? reference[opSide] - offsetSize - arrowSize : reference[side] + offsetSize,
   };
   const place = hashMap[placement1 || 'center'];
   const sideValue = place - popper[side];
@@ -229,14 +233,17 @@ class Popper extends React.Component<PopperProps, PopperStates> {
     const { destroy } = this.props;
 
     if (animationState === 'leave') {
-      this.setState({
-        show: false,
-        isPending: false,
-        ...(destroy && { mounted: false }),
-      }, () => {
-        this.destroy();
-        this.props.onVisibleChange!(false);
-      });
+      this.setState(
+        {
+          show: false,
+          isPending: false,
+          ...(destroy && { mounted: false }),
+        },
+        () => {
+          this.destroy();
+          this.props.onVisibleChange!(false);
+        },
+      );
     } else {
       this.props.onVisibleChange!(true);
     }
@@ -357,22 +364,12 @@ class Popper extends React.Component<PopperProps, PopperStates> {
       style,
     } = this.props;
 
-    const {
-      direction,
-      mounted,
-      animationState,
-      isPending,
-    } = this.state;
+    const { direction, mounted, animationState, isPending } = this.state;
     const transitionName = this.getTransitionName(animationType, animationState);
-    const innerCls = classnames(
-      className,
-      prefixCls,
-      `${prefixCls}--${direction}`,
-      {
-        [`${prefixCls}--hidden`]: animationState === 'leave',
-        [transitionName!]: isPending,
-      },
-    );
+    const innerCls = classnames(className, prefixCls, `${prefixCls}--${direction}`, {
+      [`${prefixCls}--hidden`]: animationState === 'leave',
+      [transitionName!]: isPending,
+    });
     const child = React.isValidElement(children) ? children : <span>{children}</span>;
     const childrenProps: React.RefAttributes<any> & React.HTMLAttributes<any> = {
       ...(children && (children as React.ReactElement).props),
@@ -411,11 +408,20 @@ class Popper extends React.Component<PopperProps, PopperStates> {
             ...style,
           }}
           className={innerCls}
-          ref={(node) => { this.popperNode = node!; }}
+          ref={(node) => {
+            this.popperNode = node!;
+          }}
           {...event}
         >
           <div className={`${prefixCls}__content`}>{content}</div>
-          {hasArrow && <span className={`${prefixCls}__arrow`} ref={(el) => { this.arrowRef = el!; }} />}
+          {hasArrow && (
+            <span
+              className={`${prefixCls}__arrow`}
+              ref={(el) => {
+                this.arrowRef = el!;
+              }}
+            />
+          )}
         </div>
       </ClickOutside>
     );

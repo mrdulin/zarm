@@ -1,7 +1,7 @@
-import React from 'react';
+import type { SyntheticEvent } from 'react';
 
 export default interface ClickOutsideProps {
-  onClickOutside?: (event: React.SyntheticEvent) => void;
+  onClickOutside?: (event: SyntheticEvent) => void;
   disabled?: boolean;
   className?: string;
   ignoredNode?: HTMLElement;

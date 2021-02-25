@@ -1,6 +1,7 @@
-import React, { PureComponent, ChangeEvent, InputHTMLAttributes, HTMLAttributes, ButtonHTMLAttributes } from 'react';
+import React, { PureComponent } from 'react';
+import type { ChangeEvent, InputHTMLAttributes, HTMLAttributes, ButtonHTMLAttributes } from 'react';
 import classnames from 'classnames';
-import { BaseRadioProps } from './PropsType';
+import type { BaseRadioProps } from './PropsType';
 import RadioGroup from './RadioGroup';
 import Cell from '../cell';
 

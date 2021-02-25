@@ -1,6 +1,7 @@
-import React, { PureComponent, MouseEventHandler } from 'react';
+import React, { PureComponent } from 'react';
+import type { MouseEventHandler } from 'react';
 import classnames from 'classnames';
-import PropsType from './PropsType';
+import type PropsType from './PropsType';
 import Icon from '../icon';
 
 export interface MessageProps extends PropsType {
@@ -53,19 +54,19 @@ export default class Message extends PureComponent<MessageProps, MessageState> {
     const renderArrow = hasArrow && <Icon type="arrow-right" />;
     const noFooter = !closable && !hasArrow;
 
-    return visible && (
-      <div className={classes} onClick={this.onClick}>
-        <div className={`${prefixCls}__header`}>{iconRender}</div>
-        <div className={`${prefixCls}__body`}>{children}</div>
-        {
-          !noFooter && (
+    return (
+      visible && (
+        <div className={classes} onClick={this.onClick}>
+          <div className={`${prefixCls}__header`}>{iconRender}</div>
+          <div className={`${prefixCls}__body`}>{children}</div>
+          {!noFooter && (
             <div className={`${prefixCls}__footer`}>
               {renderArrow}
               {renderCloseIcon}
             </div>
-          )
-        }
-      </div>
+          )}
+        </div>
+      )
     );
   }
 }

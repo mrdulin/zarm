@@ -1,7 +1,7 @@
 /* eslint-disable operator-linebreak */
 import React, { PureComponent } from 'react';
 import classnames from 'classnames';
-import { BaseCalendarProps } from './PropsType';
+import type { BaseCalendarProps } from './PropsType';
 import CalendarMonthView from './Month';
 import parseState from './utils/parseState';
 import DateTool from '../utils/date';

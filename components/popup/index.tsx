@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import PropsType from './PropsType';
+import type PropsType from './PropsType';
 import Portal from './Portal';
 import warnIfDeprecated from '../utils/warnIfDeprecated';
 

@@ -1,5 +1,5 @@
-import BasePickerProps from '../picker/PropsType';
-import { WheelValue, WheelItem } from '../wheel/PropsType';
+import type BasePickerProps from '../picker/PropsType';
+import type { WheelValue, WheelItem } from '../wheel/PropsType';
 
 type pickerPropsWithoutVisible = Omit<BasePickerProps, 'visible'>;
 

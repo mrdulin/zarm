@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import PropsType, { InstanceFn } from './PropsType';
+// eslint-disable-next-line import/no-duplicates
+import type PropsType from './PropsType';
+// eslint-disable-next-line import/no-duplicates
+import type { InstanceFn } from './PropsType';
 
 class Trigger extends Component<PropsType, {}> {
   static defaultProps = {

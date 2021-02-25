@@ -1,6 +1,7 @@
-import React, { Component, ReactNode } from 'react';
+import React, { Component } from 'react';
+import type { ReactNode } from 'react';
 import ReactDOM from 'react-dom';
-import PropsType from './PropsType';
+import type PropsType from './PropsType';
 import Popup from '../popup';
 import { getMountContainer } from '../utils/dom';
 

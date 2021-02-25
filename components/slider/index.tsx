@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
 import classnames from 'classnames';
-import PropsType from './PropsType';
+import type PropsType from './PropsType';
 
 import Events from '../utils/events';
-import Drag, { DragEvent, DragState } from '../drag';
+import Drag from '../drag';
+import type { DragEvent, DragState } from '../drag';
 import Tooltip from '../tooltip';
 
 const getValue = (props: Slider['props'], defaultValue: number) => {
@@ -45,9 +46,7 @@ function getClosestPoint(val: number, { marks, step, min, max }: Pick<SliderProp
 function ensureValuePrecision(val: number, props: SliderProps) {
   const { step } = props;
   const closestPoint = Number.isFinite(getClosestPoint(val, props)) ? getClosestPoint(val, props) : 0;
-  return step === null
-    ? closestPoint
-    : parseFloat(closestPoint.toFixed(getPrecision(step)));
+  return step === null ? closestPoint : parseFloat(closestPoint.toFixed(getPrecision(step)));
 }
 
 export interface SliderProps extends PropsType {
@@ -93,10 +92,7 @@ export default class Slider extends PureComponent<SliderProps, SliderStates> {
   static getDerivedStateFromProps(nextProps: SliderProps, prevState: SliderStates) {
     const { value } = nextProps;
 
-    if (
-      typeof value !== 'undefined'
-      && value !== prevState.prevPropsValue
-    ) {
+    if (typeof value !== 'undefined' && value !== prevState.prevPropsValue) {
       return {
         ...prevState,
         value,
@@ -121,17 +117,11 @@ export default class Slider extends PureComponent<SliderProps, SliderStates> {
    * @return {number}        值
    */
   getValueByOffset = (offset: number) => {
-    const {
-      min = 0,
-      max,
-      vertical,
-    } = this.props;
+    const { min = 0, max, vertical } = this.props;
 
     const percent = offset / this.getMaxOffset();
 
-    const value = vertical
-      ? (1 - percent) * (max - min) + min
-      : Math.round((min + ((max - min) * percent)));
+    const value = vertical ? (1 - percent) * (max - min) + min : Math.round(min + (max - min) * percent);
 
     return ensureValuePrecision(value, this.props);
   };
@@ -152,18 +142,12 @@ export default class Slider extends PureComponent<SliderProps, SliderStates> {
    * @return {number}       偏移量
    */
   getOffsetByValue = (value: number) => {
-    const {
-      vertical,
-      min,
-      max,
-    } = this.props;
+    const { vertical, min, max } = this.props;
 
     const maxOffset = this.getMaxOffset();
     const range = max - min;
 
-    return vertical
-      ? maxOffset * ((max - value) / (range))
-      : maxOffset * ((value - min) / (range));
+    return vertical ? maxOffset * ((max - value) / range) : maxOffset * ((value - min) / range);
   };
 
   /**
@@ -190,10 +174,7 @@ export default class Slider extends PureComponent<SliderProps, SliderStates> {
   };
 
   handleDragMove = (event?: DragEvent, dragState?: DragState) => {
-    const {
-      disabled,
-      vertical,
-    } = this.props;
+    const { disabled, vertical } = this.props;
 
     if (disabled) {
       return false;
@@ -204,9 +185,7 @@ export default class Slider extends PureComponent<SliderProps, SliderStates> {
     event!.preventDefault();
 
     const { offsetX, offsetY } = dragState!;
-    let offset = vertical
-      ? (this.offsetStart) + (offsetY || 0)
-      : (this.offsetStart || 0) + (offsetX || 0);
+    let offset = vertical ? this.offsetStart + (offsetY || 0) : (this.offsetStart || 0) + (offsetX || 0);
 
     if (offset < 0) {
       offset = 0;
@@ -272,16 +251,9 @@ export default class Slider extends PureComponent<SliderProps, SliderStates> {
    * 获取标签
    */
   renderMarkInfo = () => {
-    const {
-      prefixCls,
-      showMark,
-      marks = {},
-      vertical,
-    } = this.props;
+    const { prefixCls, showMark, marks = {}, vertical } = this.props;
 
-    const {
-      value,
-    } = this.state;
+    const { value } = this.state;
 
     const isEmptyMarks = typeof marks !== 'object' || JSON.stringify(marks) === '{}';
 
@@ -303,21 +275,13 @@ export default class Slider extends PureComponent<SliderProps, SliderStates> {
       };
 
       return (
-        <span
-          key={item}
-          className={`${prefixCls}__mark`}
-          style={markStyle}
-        >
+        <span key={item} className={`${prefixCls}__mark`} style={markStyle}>
           {marks[+item]}
         </span>
       );
     });
 
-    const marksElement = showMark && (
-      <div className={`${prefixCls}__marks`}>
-        {markElement}
-      </div>
-    );
+    const marksElement = showMark && <div className={`${prefixCls}__marks`}>{markElement}</div>;
 
     const lineDot = markKeys.map((item) => {
       const dotStyle = classnames(`${prefixCls}__line__dot`, {
@@ -328,9 +292,7 @@ export default class Slider extends PureComponent<SliderProps, SliderStates> {
         [vertical ? 'bottom' : 'left']: `${item}%`,
       };
 
-      return (
-        <span key={item} className={dotStyle} style={markStyle} />
-      );
+      return <span key={item} className={dotStyle} style={markStyle} />;
     });
 
     return (
@@ -342,20 +304,9 @@ export default class Slider extends PureComponent<SliderProps, SliderStates> {
   };
 
   render() {
-    const {
-      prefixCls,
-      className,
-      disabled,
-      min,
-      max,
-      vertical,
-      showMark,
-    } = this.props;
+    const { prefixCls, className, disabled, min, max, vertical, showMark } = this.props;
 
-    const {
-      value,
-      tooltip,
-    } = this.state;
+    const { value, tooltip } = this.state;
 
     const offset = this.getOffsetPercent(value);
 
@@ -376,20 +327,18 @@ export default class Slider extends PureComponent<SliderProps, SliderStates> {
     return (
       <div className={cls} ref={this.handleRef}>
         <div className={`${prefixCls}__content`}>
-          <div className={`${prefixCls}__line`} ref={(ele) => { this.line = ele; }}>
-            <div
-              className={`${prefixCls}__line__bg`}
-              style={lineBg}
-            />
+          <div
+            className={`${prefixCls}__line`}
+            ref={(ele) => {
+              this.line = ele;
+            }}
+          >
+            <div className={`${prefixCls}__line__bg`} style={lineBg} />
 
             {this.renderMarkInfo()}
           </div>
 
-          <Drag
-            onDragStart={this.handleDragStart}
-            onDragMove={this.handleDragMove}
-            onDragEnd={this.handleDragEnd}
-          >
+          <Drag onDragStart={this.handleDragStart} onDragMove={this.handleDragMove} onDragEnd={this.handleDragEnd}>
             <div
               className={`${prefixCls}__handle`}
               role="slider"

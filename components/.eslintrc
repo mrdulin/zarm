@@ -3,5 +3,8 @@
   "extends": ["za/typescript-react"],
   "env": {
     "jest": true
+  },
+  "rules": {
+    "multiline-ternary":"off"
   }
 }

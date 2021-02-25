@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { BaseModalProps } from './PropsType';
+import type { BaseModalProps } from './PropsType';
 import Popup from '../popup';
 import ModalHeader from './ModalHeader';
 import ModalBody from './ModalBody';

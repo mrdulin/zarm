@@ -1,4 +1,5 @@
-import { PureComponent, cloneElement, ReactElement, MouseEvent, TouchEvent } from 'react';
+import { PureComponent, cloneElement } from 'react';
+import type { ReactElement, MouseEvent, TouchEvent } from 'react';
 import Events from '../utils/events';
 
 export type DragEvent = MouseEvent | TouchEvent;

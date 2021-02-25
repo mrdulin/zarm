@@ -1,11 +1,9 @@
-import React, { HTMLAttributes, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
+import type { HTMLAttributes } from 'react';
 import classnames from 'classnames';
-import { BasePanelProps } from './PropsType';
+import type { BasePanelProps } from './PropsType';
 
-export type HTMLDivProps = Omit<
-  HTMLAttributes<HTMLDivElement>,
-  'title'
->;
+export type HTMLDivProps = Omit<HTMLAttributes<HTMLDivElement>, 'title'>;
 
 export interface PanelProps extends HTMLDivProps, BasePanelProps {
   prefixCls?: string;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Point } from './PropsType';
+import type { Point } from './PropsType';
 import Events from '../utils/events';
 
 function getDistance(a: Point, b?: Point): number {
@@ -207,6 +207,10 @@ export default class PinchZoom extends Component<PinchZoomProps, any> {
         onLoad: this.onload,
       });
     });
-    return (<div ref={this._container} className={`${className} ${prefixCls}`}>{child}</div>);
+    return (
+      <div ref={this._container} className={`${className} ${prefixCls}`}>
+        {child}
+      </div>
+    );
   }
 }

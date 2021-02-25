@@ -1,4 +1,5 @@
-import React, { Context, ComponentType } from 'react';
+import React from 'react';
+import type { Context, ComponentType } from 'react';
 import hoistNonReactStatic from 'hoist-non-react-statics';
 import { ConfigContext, LocaleContext } from '../config-provider/ConfigProvider';
 import defaultLocaleData from '../config-provider/locale/zh_CN';

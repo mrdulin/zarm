@@ -1,13 +1,8 @@
-import React, { PureComponent, CSSProperties } from 'react';
-import {
-  StyleSheet,
-  View,
-  ViewStyle,
-  UIManager,
-  Animated,
-  Easing,
-} from 'react-native';
-import PropsType from './PropsType';
+import React, { PureComponent } from 'react';
+import type { CSSProperties } from 'react';
+import { StyleSheet, View, Animated, Easing, UIManager } from 'react-native';
+import type { ViewStyle } from 'react-native';
+import type PropsType from './PropsType';
 import popupStyle from './style/index.native';
 // import Mask from '../Mask';
 
@@ -96,14 +91,11 @@ export default class Popup extends PureComponent<PopupProps, any> {
       transfromStyle,
     });
 
-    Animated.timing(
-      this.state.translateValue,
-      {
-        toValue: newValue,
-        duration: animationDuration,
-        easing: Easing.linear,
-      },
-    ).start();
+    Animated.timing(this.state.translateValue, {
+      toValue: newValue,
+      duration: animationDuration,
+      easing: Easing.linear,
+    }).start();
     // if (stayTime > 0 && autoClose) {
     //   this.timer = setTimeout(() => {
     //     onMaskClick();
@@ -119,14 +111,11 @@ export default class Popup extends PureComponent<PopupProps, any> {
       // isPending: false,
       // isMaskShow: visible || false,
     });
-    Animated.timing(
-      this.state.translateValue,
-      {
-        toValue: 0,
-        duration: animationDuration,
-        easing: Easing.linear,
-      },
-    ).start();
+    Animated.timing(this.state.translateValue, {
+      toValue: 0,
+      duration: animationDuration,
+      easing: Easing.linear,
+    }).start();
   };
 
   animationEnd = (value) => {
@@ -179,16 +168,9 @@ export default class Popup extends PureComponent<PopupProps, any> {
     const { direction, styles, children, style } = this.props;
     const { directionStyle, transfromStyle } = this.state;
 
-    const popupCls = [
-      styles!.wrapperStyle,
-      styles![`${direction}Wrapper`],
-      style,
-    ] as ViewStyle;
+    const popupCls = [styles!.wrapperStyle, styles![`${direction}Wrapper`], style] as ViewStyle;
 
-    const invisibleStyle = [
-      styles!.invisibleWrapper,
-      styles![`${direction}Invisible`],
-    ] as ViewStyle;
+    const invisibleStyle = [styles!.invisibleWrapper, styles![`${direction}Invisible`]] as ViewStyle;
 
     const popUpStyle = [popupCls, directionStyle, transfromStyle];
 

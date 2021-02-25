@@ -1,4 +1,4 @@
-import { Locale } from '../config-provider/PropsType';
+import type { Locale } from '../config-provider/PropsType';
 
 export interface Action {
   text: string;

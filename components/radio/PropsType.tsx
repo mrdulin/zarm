@@ -1,5 +1,5 @@
-import { ChangeEvent } from 'react';
-import { ButtonSize } from '../button/PropsType';
+import type { ChangeEvent } from 'react';
+import type { ButtonSize } from '../button/PropsType';
 
 export type RadioType = 'button' | 'cell';
 export type RadioShape = 'rect' | 'radius' | 'round';

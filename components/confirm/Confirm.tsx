@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import classnames from 'classnames';
-import PropsType from './PropsType';
+import type PropsType from './PropsType';
 import Modal from '../modal';
 import confirmLocale from './locale/zh_CN';
 
@@ -30,7 +30,9 @@ export default class Confirm extends PureComponent<ConfirmProps, {}> {
           {...others}
           footer={(
             <>
-              <button type="button" className={`${prefixCls}__button`} onClick={onCancel}>{cancelText || locale!.cancelText}</button>
+              <button type="button" className={`${prefixCls}__button`} onClick={onCancel}>
+                {cancelText || locale!.cancelText}
+              </button>
               <button type="button" className={`${prefixCls}__button ${prefixCls}__button--ok`} onClick={onOk}>
                 {okText || locale!.okText}
               </button>

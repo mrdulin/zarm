@@ -1,12 +1,8 @@
-import React, { PureComponent, CSSProperties } from 'react';
-import {
-  StyleSheet,
-  View,
-  TouchableHighlight,
-  ViewStyle,
-  GestureResponderEvent,
-} from 'react-native';
-import PropsType from './PropsType';
+import React, { PureComponent } from 'react';
+import type { CSSProperties } from 'react';
+import { StyleSheet, View, TouchableHighlight } from 'react-native';
+import type { ViewStyle, GestureResponderEvent } from 'react-native';
+import type PropsType from './PropsType';
 import cellStyle from './style/index.native';
 import { RenderWithText } from '../utils/renderWithText.native';
 
@@ -40,30 +36,12 @@ export default class Cell extends PureComponent<CellProps, any> {
   };
 
   render() {
-    const {
-      hasArrow,
-      icon,
-      title,
-      description,
-      help,
-      style,
-      styles,
-      onClick,
-      children,
-      ...others
-    } = this.props;
+    const { hasArrow, icon, title, description, help, style, styles, onClick, children, ...others } = this.props;
     const { isActive } = this.state;
 
-    const wrapperStyle = [
-      styles!.wrapperStyle,
-      isActive && styles!.activeWrapper,
-      style,
-    ] as ViewStyle;
+    const wrapperStyle = [styles!.wrapperStyle, isActive && styles!.activeWrapper, style] as ViewStyle;
 
-    const titleViewStyle = [
-      styles!.titleViewStyle,
-      !!children && styles!.labelTitleViewStyle,
-    ] as ViewStyle;
+    const titleViewStyle = [styles!.titleViewStyle, !!children && styles!.labelTitleViewStyle] as ViewStyle;
 
     const contentStyle = (!onClick && wrapperStyle) as ViewStyle;
     const iconRender = icon && <View style={styles!.iconStyle}>{icon}</View>;
@@ -78,27 +56,14 @@ export default class Cell extends PureComponent<CellProps, any> {
           <View style={styles!.contentStyle as ViewStyle}>
             {iconRender}
             <View style={styles!.bodyStyle as ViewStyle}>
-              <RenderWithText
-                component={title}
-                viewStyle={titleViewStyle}
-                textStyle={styles!.titleTextStyle}
-              />
-              <RenderWithText
-                component={children}
-                viewStyle={styles!.childrenViewStyle}
-              />
+              <RenderWithText component={title} viewStyle={titleViewStyle} textStyle={styles!.titleTextStyle} />
+              <RenderWithText component={children} viewStyle={styles!.childrenViewStyle} />
             </View>
-            <RenderWithText
-              component={description}
-              textStyle={styles!.descriptionTextStyle}
-            />
+            <RenderWithText component={description} textStyle={styles!.descriptionTextStyle} />
             {arrowRender}
           </View>
         </View>
-        <RenderWithText
-          component={help}
-          viewStyle={cellStyles.helpViewStyle}
-        />
+        <RenderWithText component={help} viewStyle={cellStyles.helpViewStyle} />
       </View>
     );
 
@@ -111,8 +76,6 @@ export default class Cell extends PureComponent<CellProps, any> {
       ...others,
     };
 
-    return onClick
-      ? <TouchableHighlight {...wrapperProps}>{cellRender}</TouchableHighlight>
-      : cellRender;
+    return onClick ? <TouchableHighlight {...wrapperProps}>{cellRender}</TouchableHighlight> : cellRender;
   }
 }

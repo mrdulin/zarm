@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
-import PropsType from './PropsType';
+import type PropsType from './PropsType';
 import Popup from '../popup';
 import { getMountContainer } from '../utils/dom';
 import ActivityIndicator from '../activity-indicator';
@@ -35,19 +35,17 @@ export default class Loading extends PureComponent<LoadingProps, {}> {
     }
 
     if (Loading.zarmLoading) {
-      const props: LoadingProps = { ...Loading.defaultProps, ...content as LoadingProps, ...{ visible: true, mountContainer: false } };
-
-      Loading.hideHelper = () => {
-        ReactDOM.render(
-          <Loading {...props} visible={false} />,
-          Loading.zarmLoading,
-        );
+      const props: LoadingProps = {
+        ...Loading.defaultProps,
+        ...(content as LoadingProps),
+        ...{ visible: true, mountContainer: false },
       };
 
-      ReactDOM.render(
-        <Loading {...props} />,
-        Loading.zarmLoading,
-      );
+      Loading.hideHelper = () => {
+        ReactDOM.render(<Loading {...props} visible={false} />, Loading.zarmLoading);
+      };
+
+      ReactDOM.render(<Loading {...props} />, Loading.zarmLoading);
     }
   };
 
